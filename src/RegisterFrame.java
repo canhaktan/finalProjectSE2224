@@ -1,13 +1,11 @@
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class RegisterFrame extends JFrame {
-    private final Connection connection = new DatabaseConnector().connect();
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
     private JLabel usernameLabel, passwordLabel;
     private JTextField usernameTextField,passwordTextField;
     private JButton registerButton;
@@ -38,51 +36,68 @@ public class RegisterFrame extends JFrame {
                 }
             }
         });
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
     public void register(String username, String password) {
+        Connection connection = null;
+        PreparedStatement ps = null;
         try {
+            connection = new DatabaseConnector().connect();
             String sql = "INSERT INTO userinfo (username, password) VALUES (?, ?)";
             ps = connection.prepareStatement(sql);
             ps.setString(1,username);
             ps.setString(2,password);
-            ps.executeUpdate();
+            int rowsInserted = ps.executeUpdate();
+            if (rowsInserted > 0) { // This is how to control!
+                JOptionPane.showMessageDialog(rootPane, "A new user was registered successfully!");
+                this.usernameTextField.setText("");
+                this.passwordTextField.setText("");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closeResources();
+            try { // Closing ResultSet, PreparedStatement and Connection objects.
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
     public boolean isUserExists(String username) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         boolean isExists = false;
         try {
+            connection = new DatabaseConnector().connect();
             String sql = "SELECT username FROM userinfo WHERE username = ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, username);
             rs = ps.executeQuery();
             isExists = rs.next();
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("username exists, try something else fam");
+           JOptionPane.showMessageDialog(rootPane,"Some SQL related error happened");
         } finally {
-            closeResources();
+            try { // Closing ResultSet, PreparedStatement and Connection objects.
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return isExists;
-    }
-    private void closeResources() { // Closing ResultSet, PreparedStatement and Connection objects.
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
