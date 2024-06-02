@@ -1,10 +1,8 @@
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-
 public class RegisterFrame extends JFrame {
     private JLabel usernameLabel, passwordLabel;
     private JTextField usernameTextField,passwordTextField;
@@ -30,6 +28,7 @@ public class RegisterFrame extends JFrame {
                 String password = passwordTextField.getText();
                 if(!isUserExists(username)){
                     register(username,password);
+                    dispose(); // closes the RegisterFrame
                 }
                 else{
                     JOptionPane.showMessageDialog(rootPane,"Username exists bro");
@@ -48,10 +47,10 @@ public class RegisterFrame extends JFrame {
             ps.setString(1,username);
             ps.setString(2,password);
             int rowsInserted = ps.executeUpdate();
-            if (rowsInserted > 0) { // This is how to control!
-                JOptionPane.showMessageDialog(rootPane, "A new user was registered successfully!");
-                this.usernameTextField.setText("");
-                this.passwordTextField.setText("");
+            if (rowsInserted > 0) { // This is how to control if the query returns a result or not!
+                JOptionPane.showMessageDialog(rootPane, "User is now registered!"); // I changed the display message xD
+                usernameTextField.setText(""); // setting it blank if user wants register again, completely optional
+                passwordTextField.setText(""); // setting it blank if user wants register again, completely optional
             }
         } catch (SQLException e) {
             e.printStackTrace();
