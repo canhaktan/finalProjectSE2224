@@ -8,11 +8,11 @@ public class MenuFrame extends JFrame implements ActionListener { // implements 
     // Delete a visit -done
     // Add a location -done
     // Display-Edit-Update visit
-    // Display the country names whose best feature is food in sorted order with respect to their rating
+    // Display the country names whose best feature is food in sorted order with respect to their rating -done
     // Display the image of a location with the visit id
-    // Display the information of all visits done in the given year
+    // Display the information of all visits done in the given year -done
     // Display the country name(s) that the user visited the most
-    // Display the country name(s) that are visited only in spring
+    // Display the country name(s) that are visited only in spring -done
     // Share your favorite visit id with your friend. (friendUsername,visitIdShared,yourUsername) +|+
     // Display the visit information shared with me. (In this func, from sharedvisits ......) +|+
     private JButton deleteVisitB,addLocationB,displayB,editB,shareVisitB;
