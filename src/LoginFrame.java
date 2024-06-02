@@ -31,6 +31,8 @@ public class LoginFrame extends JFrame {
                 String password = passwordTextField.getText();
                 if(login(username,password)){
                     JOptionPane.showMessageDialog(rootPane,"Login successful");
+                    new MenuFrame();
+                    dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(rootPane,"Incorrect username or password");

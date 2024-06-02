@@ -56,11 +56,12 @@ public class AddLocationForm extends JFrame {
         add(ratingLabel);
         add(ratingBox);
         add(addLocButton);
-
+        new LocationForm().loadLocations();
         addLocButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addLocation();
+                new LocationForm().loadLocations();
                 dispose();
             }
         });
