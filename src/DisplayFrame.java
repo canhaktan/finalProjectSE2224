@@ -14,13 +14,13 @@ import java.sql.SQLException;
 public class DisplayFrame extends JFrame implements ActionListener{
     // Delete a visit -done
     // Add a location -done
-    // Display-Edit-Update visit
+    // Display-Edit-Update visit -done
     // Display the country names whose best feature is food in sorted order with respect to their rating -done
-    // Display the image of a location with the visit id TODO
+    // Display the image of a location with the visit id -done
     // Display the information of all visits done in the given year -done
-    // Display the country name(s) that the user visited the most -doneALMOST
+    // Display the country name(s) that the user visited the most -done
     // Display the country name(s) that are visited only in spring -done
-    // Share your favorite visit id with your friend. (friendUsername,visitIdShared,yourUsername) -doneMEH
+    // Share your favorite visit id with your friend. (friendUsername,visitIdShared,yourUsername) -done
     // Display the visit information shared with me. (In this func, from sharedvisits ......) -done
 
     private JButton countryNamesFeatureByFoodB,locationImageB,informationOfAllVisitsInGivenYearB,countryNamesUserVisitedMostB,countryNamesVisitedOnlySpringB,visitInfoSharedWithMeB;
