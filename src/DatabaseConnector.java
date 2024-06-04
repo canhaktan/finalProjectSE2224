@@ -1,6 +1,7 @@
 import java.sql.*;
-
 public class DatabaseConnector {
+    // Inspired by https://gist.github.com/eirikbakke/1074542
+    // I didn't use all the code from the source, but I choose parts that I needed most or useful for this particular project.
     // I don't want to apply this connection manually all the time.
     // I'm planning to work with only 1 database/schema which is 'finalproject'
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";

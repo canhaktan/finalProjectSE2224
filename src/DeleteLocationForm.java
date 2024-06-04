@@ -5,9 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -76,23 +74,6 @@ public class DeleteLocationForm extends JFrame {
         });
         setVisible(true);
     }
-
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == deleteButton) {
-            String visitIdText = deleteF.getText();
-            try {
-                int visitId = Integer.parseInt(visitIdText);
-                if (deleteLocation(visitId)) {
-                    JOptionPane.showMessageDialog(rootPane, "Location deleted.");
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Location ID doesn't exist.");
-                }
-            } catch (NumberFormatException var4) {
-                JOptionPane.showMessageDialog(rootPane, "Please enter a valid visit ID.");
-            }
-        }
-    }
-
     public boolean deleteLocation(int visitId) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -107,7 +88,7 @@ public class DeleteLocationForm extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
+            try { // Closing PreparedStatement and Connection objects.
                 if (stmt != null) {
                     stmt.close();
                 }

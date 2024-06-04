@@ -1,4 +1,5 @@
 public class DataValidationChecker {
+    // Not a 'necessary' class, however I wanted to put this in case of any usage needed
     public boolean isInteger(String txt){
         boolean integer = true;
         for(int i = 0;i < txt.length();i++){
@@ -11,7 +12,6 @@ public class DataValidationChecker {
         }
         return integer;
     }
-
     public boolean isString(String txt){
         boolean string = true;
         for(int i = 0;i < txt.length();i++){
@@ -29,7 +29,4 @@ public class DataValidationChecker {
         }
         return string;
     }
-
-
-
 }

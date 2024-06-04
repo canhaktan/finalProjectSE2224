@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 public class AddLocationForm extends JFrame {
     private JLabel countryNameLabel, cityNameLabel, yearVisitedLabel,seasonVisitedLabel, bestFeatureLabel, commentLabel, ratingLabel;
     private JTextField countryNameField,cityNameField,yearVisitedField,bestFeatureField,commentField;
@@ -61,7 +60,6 @@ public class AddLocationForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addLocation();
-                new LocationForm().loadLocations();
                 dispose();
             }
         });
@@ -90,12 +88,13 @@ public class AddLocationForm extends JFrame {
             ps.setString(7,rating);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(rootPane,"Location added successfully! :)");
+            new LocationForm().loadLocations();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(rootPane,"Error happened: " + e.getMessage());
         }
         finally {
-            try { // Closing ResultSet, PreparedStatement and Connection objects.
+            try { // Closing PreparedStatement and Connection objects.
                 if (ps != null) {
                     ps.close();
                 }
