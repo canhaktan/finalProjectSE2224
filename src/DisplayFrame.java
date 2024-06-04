@@ -134,25 +134,21 @@ public class DisplayFrame extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this, "Please enter a visit ID");
             return;
         }
-
-        String imagePath = "C://Users//canha//IdeaProjects//finalProjectSE2224//src//images//" + visitId + ".png";
+        String imagePath = "C://Users//canha//IdeaProjects//finalprojectSE2224//images//Location" + visitId + ".jpg";
         File imageFile = new File(imagePath);
         if (!imageFile.exists()) {
             JOptionPane.showMessageDialog(this, "Image not found for Visit ID: " + visitId);
             return;
         }
-
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
         try {
             conn = new DatabaseConnector().connect();
             String sql = "SELECT * FROM visits WHERE visitID = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.parseInt(visitId));
             rs = pstmt.executeQuery();
-
             if (rs.next()) {
                 String countryName = rs.getString("country_name");
                 String cityName = rs.getString("city_name");
@@ -161,11 +157,10 @@ public class DisplayFrame extends JFrame implements ActionListener{
                 String bestFeature = rs.getString("best_feature");
                 String comment = rs.getString("comment");
                 int rating = rs.getInt("rating");
-
                 BufferedImage image = ImageIO.read(imageFile);
-
                 JFrame imageFrame = new JFrame("Image and Info for Visit ID: " + visitId);
-                imageFrame.setSize(600, 800);
+
+                imageFrame.setSize(800, 800);
                 imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 imageFrame.setLocationRelativeTo(null);
 
@@ -174,24 +169,21 @@ public class DisplayFrame extends JFrame implements ActionListener{
                 JTextArea infoArea = new JTextArea();
                 infoArea.setEditable(false);
                 infoArea.setText("Country Name: " + countryName + "\n" +
-                        "City Name: " + cityName + "\n" +
-                        "Year Visited: " + yearVisited + "\n" +
-                        "Season Visited: " + seasonVisited + "\n" +
-                        "Best Feature: " + bestFeature + "\n" +
-                        "Comment: " + comment + "\n" +
-                        "Rating: " + rating);
+                        "City Name: " + cityName + "\n" + "Year Visited: " + yearVisited + "\n" +
+                        "Season Visited: " + seasonVisited + "\n" + "Best Feature: " + bestFeature + "\n" +
+                        "Comment: " + comment + "\n" + "Rating: " + rating);
 
                 panel.add(new JScrollPane(imageLabel), BorderLayout.CENTER);
                 panel.add(new JScrollPane(infoArea), BorderLayout.SOUTH);
                 imageFrame.add(panel);
                 imageFrame.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "No data found for Visit ID: " + visitId);
+                JOptionPane.showMessageDialog(this, "No Image for VisitID: " + visitId);
             }
 
         } catch (SQLException | IOException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading image or data");
+            JOptionPane.showMessageDialog(this, "Error loading image");
         } finally {
             try {
                 if (rs != null) rs.close();
