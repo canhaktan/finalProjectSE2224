@@ -134,7 +134,7 @@ public class DisplayFrame extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this, "Please enter a visit ID");
             return;
         }
-        String imagePath = "C://Users//canha//IdeaProjects//finalprojectSE2224//images//Location" + visitId + ".jpg";
+        String imagePath = "C://Users//canha//IdeaProjects//finalprojectSE2224//src//images//Location" + visitId + ".jpg";
         File imageFile = new File(imagePath);
         if (!imageFile.exists()) {
             JOptionPane.showMessageDialog(this, "Image not found for Visit ID: " + visitId);
