@@ -127,7 +127,6 @@ public class DisplayFrame extends JFrame implements ActionListener{
 
         }
     }
-    // couldn't do it :( not working
     private void showImage() {
         String visitId = visitIdImageF.getText();
         if (visitId.isEmpty()) {
